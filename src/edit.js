@@ -1,41 +1,89 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
 import { __ } from '@wordpress/i18n';
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
+import { 
+	useBlockProps,
+	InspectorControls,
+	PanelColorSettings,
+	RichText
+} from '@wordpress/block-editor';
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
+import {
+	TextControl,
+	PanelBody,
+	PanelRow,
+	ToggleControl,
+	ExternalLink
+} from '@wordpress/components';
+
 import './editor.scss';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {WPElement} Element to render.
- */
-export default function Edit() {
+export default function Edit ({ attributes, setAttributes }) {
+	const { 
+		content,
+		backgroundColour,
+		backgroundImage,
+		textColour,
+		title
+	} = attributes;
+
+	const onChangeBackgroundColour = (newBackgroundColour) => {
+		setAttributes({ backgroundColour: newBackgroundColour });
+	}
+
+	const onChangeContent = (newContent) => {
+		setAttributes({ content: newContent });
+	}
+
+	const onChangeTextColour = (newTextColour) => {
+		setAttributes({ textColour: newTextColour });
+	}
+
+	const onChangeTitle = (newTitle) => {
+		setAttributes({ title: newTitle });
+	}
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __(
-				'Three Column Content – hello from the editor!',
-				'danstoakes-content-three-col'
-			) }
-		</p>
+		<div 
+			{ ...useBlockProps() }
+			style={{
+				backgroundImage: backgroundImage,
+				backgroundPosition: 'center',
+				backgroundSize: 'cover',
+				backgroundRepeat: 'no-repeat'
+			}}
+		>
+			<InspectorControls>
+				<PanelColorSettings 
+					title={ __('Colour settings', 'danstoakes-content-three-col')}
+					initialOpen={ false }
+					colorSettings={[
+						{
+						  value: textColour,
+						  onChange: onChangeTextColour,
+						  label: __('Text colour', 'danstoakes-content-three-col')
+						},
+						{
+						  value: backgroundColour,
+						  onChange: onChangeBackgroundColour,
+						  label: __('Background colour', 'danstoakes-content-three-col')
+						}
+					]}
+				/>
+			</InspectorControls>
+			<RichText
+				tagName='h2'
+				value={ title }
+				onChange={ onChangeTitle }
+				placeholder={__('Enter title...', 'danstoakes-content-three-col')}
+            />
+			<RichText
+				tagName='p'
+				onChange={ onChangeContent }
+				allowedFormats={[ 'core/bold', 'core/italic' ]}
+				value={ content }
+				placeholder={ __( 'Write your text...' ) }
+				style={{ color: textColour }}
+			/>
+		</div>
 	);
 }
