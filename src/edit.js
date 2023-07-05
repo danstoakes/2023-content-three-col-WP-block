@@ -1,25 +1,37 @@
 import { __ } from '@wordpress/i18n';
 
-import { 
+import {
 	useBlockProps,
 	InspectorControls,
 	PanelColorSettings,
-	RichText
+	RichText,
+	MediaUpload,
+	MediaUploadCheck
 } from '@wordpress/block-editor';
 
 import {
+	BaseControl,
+	Button,
 	TextControl,
 	PanelBody,
-	PanelRow,
-	ToggleControl,
-	ExternalLink
+	PanelRow
 } from '@wordpress/components';
 
 import './editor.scss';
 
-export default function Edit ({ attributes, setAttributes }) {
-	const { 
-		content,
+import ContentColumn from './lib/content-column';
+
+export default function Edit({ attributes, setAttributes }) {
+	const {
+		columnOneTitle,
+		columnOneContent,
+		columnOneImage,
+		columnTwoTitle,
+		columnTwoContent,
+		columnTwoImage,
+		columnThreeTitle,
+		columnThreeContent,
+		columnThreeImage,
 		backgroundColour,
 		backgroundImage,
 		textColour,
@@ -28,10 +40,6 @@ export default function Edit ({ attributes, setAttributes }) {
 
 	const onChangeBackgroundColour = (newBackgroundColour) => {
 		setAttributes({ backgroundColour: newBackgroundColour });
-	}
-
-	const onChangeContent = (newContent) => {
-		setAttributes({ content: newContent });
 	}
 
 	const onChangeTextColour = (newTextColour) => {
@@ -43,8 +51,8 @@ export default function Edit ({ attributes, setAttributes }) {
 	}
 
 	return (
-		<div 
-			{ ...useBlockProps() }
+		<div
+			{...useBlockProps()}
 			style={{
 				backgroundImage: backgroundImage,
 				backgroundPosition: 'center',
@@ -53,37 +61,57 @@ export default function Edit ({ attributes, setAttributes }) {
 			}}
 		>
 			<InspectorControls>
-				<PanelColorSettings 
-					title={ __('Colour settings', 'danstoakes-content-three-col')}
-					initialOpen={ false }
+				<PanelColorSettings
+					title={__('Colour settings', 'danstoakes-content-three-col')}
+					initialOpen={false}
 					colorSettings={[
 						{
-						  value: textColour,
-						  onChange: onChangeTextColour,
-						  label: __('Text colour', 'danstoakes-content-three-col')
+							value: textColour,
+							onChange: onChangeTextColour,
+							label: __('Text colour', 'danstoakes-content-three-col')
 						},
 						{
-						  value: backgroundColour,
-						  onChange: onChangeBackgroundColour,
-						  label: __('Background colour', 'danstoakes-content-three-col')
+							value: backgroundColour,
+							onChange: onChangeBackgroundColour,
+							label: __('Background colour', 'danstoakes-content-three-col')
 						}
 					]}
 				/>
 			</InspectorControls>
-			<RichText
-				tagName='h2'
-				value={ title }
-				onChange={ onChangeTitle }
-				placeholder={__('Enter title...', 'danstoakes-content-three-col')}
-            />
-			<RichText
-				tagName='p'
-				onChange={ onChangeContent }
-				allowedFormats={[ 'core/bold', 'core/italic' ]}
-				value={ content }
-				placeholder={ __( 'Write your text...' ) }
-				style={{ color: textColour }}
-			/>
+			<div class="content">
+				<RichText
+					tagName='h2'
+					value={title}
+					onChange={onChangeTitle}
+					placeholder={__('Enter title...', 'danstoakes-content-three-col')}
+				/>
+				<div class="content-columns">
+					<ContentColumn
+						title={columnOneTitle}
+						onChangeTitle={(title) => setAttributes({ columnOneTitle: title })}
+						content={columnOneContent}
+						onChangeContent={(content) => setAttributes({ columnOneContent: content })}
+						image={columnOneImage}
+						onChangeImage={(image) => setAttributes({ columnOneImage: image })}
+					/>
+					<ContentColumn
+						title={columnTwoTitle}
+						onChangeTitle={(title) => setAttributes({ columnTwoTitle: title })}
+						content={columnTwoContent}
+						onChangeContent={(content) => setAttributes({ columnTwoContent: content })}
+						image={columnTwoImage}
+						onChangeImage={(image) => setAttributes({ columnTwoImage: image })}
+					/>
+					<ContentColumn
+						title={columnThreeTitle}
+						onChangeTitle={(title) => setAttributes({ columnThreeTitle: title })}
+						content={columnThreeContent}
+						onChangeContent={(content) => setAttributes({ columnThreeContent: content })}
+						image={columnThreeImage}
+						onChangeImage={(image) => setAttributes({ columnThreeImage: image })}
+					/>
+				</div>
+			</div>
 		</div>
 	);
 }

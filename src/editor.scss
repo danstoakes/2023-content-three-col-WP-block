@@ -1,9 +1,8 @@
-/**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
- */
+.content {
+	text-align: center;
 
-.wp-block-danstoakes-content-three-col-danstoakes-content-three-col {
-	border: 1px dotted #f00;
+	&-columns {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	}
 }
