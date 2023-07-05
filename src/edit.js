@@ -10,9 +10,7 @@ import {
 } from '@wordpress/block-editor';
 
 import {
-	BaseControl,
 	Button,
-	TextControl,
 	PanelBody,
 	PanelRow
 } from '@wordpress/components';
@@ -38,16 +36,16 @@ export default function Edit({ attributes, setAttributes }) {
 		title
 	} = attributes;
 
-	const onChangeBackgroundColour = (newBackgroundColour) => {
-		setAttributes({ backgroundColour: newBackgroundColour });
+	const onChangeBackgroundColour = (backgroundColour) => {
+		setAttributes({ backgroundColour: backgroundColour });
 	}
 
-	const onChangeTextColour = (newTextColour) => {
-		setAttributes({ textColour: newTextColour });
+	const onChangeTextColour = (textColour) => {
+		setAttributes({ textColour: textColour });
 	}
 
-	const onChangeTitle = (newTitle) => {
-		setAttributes({ title: newTitle });
+	const onChangeTitle = (title) => {
+		setAttributes({ title: title });
 	}
 
 	return (
@@ -77,6 +75,30 @@ export default function Edit({ attributes, setAttributes }) {
 						}
 					]}
 				/>
+				<PanelBody
+					title={ __( 'Background image', 'danstoakes-content-three-col' )}
+					initialOpen={true}
+				>
+					<PanelRow>
+						<fieldset>
+							<MediaUploadCheck>
+								<MediaUpload
+									onSelect={(backgroundImage) => setAttributes({ backgroundImage: backgroundImage })}
+									allowedTypes={['image']}
+									value={backgroundImage}
+									render={({ open }) => (
+										<>
+											{backgroundImage ? (
+												<img src={backgroundImage.url} alt="" style={{ maxWidth: '100%', marginBottom: '10px' }} />
+											) : null}
+											<Button onClick={open}>{__('Select Image', 'danstoakes-content-three-col')}</Button>
+										</>
+									)}
+								/>
+							</MediaUploadCheck>
+						</fieldset>
+					</PanelRow>
+				</PanelBody>
 			</InspectorControls>
 			<div class="content">
 				<RichText

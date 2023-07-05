@@ -5,11 +5,9 @@ import {
 } from '@wordpress/block-editor';
 import { __ } from '@wordpress/i18n';
 
-import * as styles from './index.module.scss';
-
 const ContentColumn = ({ title, onChangeTitle, content, onChangeContent, image, onChangeImage }) => {
     return (
-        <div className={ styles.column }>
+        <div>
             <RichText
                 tagName='h3'
                 value={title}
