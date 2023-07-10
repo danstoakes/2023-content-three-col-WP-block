@@ -23,7 +23,7 @@ export default function save({ attributes }) {
 		<div
 			style={{
 				backgroundColor: backgroundColour,
-				backgroundImage: backgroundImage ? `url(${backgroundImage})` : null,
+				backgroundImage: backgroundImage ? `url(${backgroundImage?.url})` : null,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat',

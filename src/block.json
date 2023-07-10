@@ -10,6 +10,52 @@
 	"supports": {
 		"html": false
 	},
+	"attributes": {
+		"backgroundColour": {
+			"type": "string"
+		},
+		"backgroundImage": {
+			"type": "object"
+		},
+		"columnOneTitle": {
+			"type": "string",
+			"selector": "h3"
+		},
+		"columnOneContent": {
+			"type": "string"
+		},
+		"columnOneImage": {
+			"type": "object"
+		},
+		"columnTwoTitle": {
+			"type": "string",
+			"selector": "h3"
+		},
+		"columnTwoContent": {
+			"type": "string"
+		},
+		"columnTwoImage": {
+			"type": "object"
+		},
+		"columnThreeTitle": {
+			"type": "string",
+			"selector": "h3"
+		},
+		"columnThreeContent": {
+			"type": "string"
+		},
+		"columnThreeImage": {
+			"type": "object"
+		},
+		"textColour": {
+			"type": "string"
+		},
+		"title": {
+			"type": "string",
+			"source": "html",
+			"selector": "h2"
+		}
+	},
 	"textdomain": "danstoakes-content-three-col",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

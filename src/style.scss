@@ -3,3 +3,20 @@
 	color: #fff;
 	padding: 2px;
 }
+
+.content {
+	padding: 5rem;
+	text-align: center;
+
+	&-column {
+		img {
+			width: 100%;
+		}
+	}
+
+	&-columns {
+		column-gap: 5rem;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
