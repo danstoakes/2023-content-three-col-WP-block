@@ -19,8 +19,10 @@ import './editor.scss';
 
 import ContentColumn from './lib/content-column';
 
-export default function Edit({ attributes, setAttributes }) {
+export default function Edit ({ attributes, setAttributes }) {
 	const {
+		backgroundColour,
+		backgroundImage,
 		columnOneTitle,
 		columnOneContent,
 		columnOneImage,
@@ -30,8 +32,6 @@ export default function Edit({ attributes, setAttributes }) {
 		columnThreeTitle,
 		columnThreeContent,
 		columnThreeImage,
-		backgroundColour,
-		backgroundImage,
 		textColour,
 		title
 	} = attributes;
@@ -64,14 +64,14 @@ export default function Edit({ attributes, setAttributes }) {
 					initialOpen={false}
 					colorSettings={[
 						{
-							value: textColour,
-							onChange: onChangeTextColour,
-							label: __('Text colour', 'danstoakes-content-three-col')
-						},
-						{
 							value: backgroundColour,
 							onChange: onChangeBackgroundColour,
 							label: __('Background colour', 'danstoakes-content-three-col')
+						},
+						{
+							value: textColour,
+							onChange: onChangeTextColour,
+							label: __('Text colour', 'danstoakes-content-three-col')
 						}
 					]}
 				/>
@@ -100,14 +100,14 @@ export default function Edit({ attributes, setAttributes }) {
 					</PanelRow>
 				</PanelBody>
 			</InspectorControls>
-			<div class="content">
+			<div className="content">
 				<RichText
 					tagName='h2'
 					value={title}
 					onChange={onChangeTitle}
 					placeholder={__('Enter title...', 'danstoakes-content-three-col')}
 				/>
-				<div class="content-columns">
+				<div className="content-columns">
 					<ContentColumn
 						title={columnOneTitle}
 						onChangeTitle={(title) => setAttributes({ columnOneTitle: title })}
