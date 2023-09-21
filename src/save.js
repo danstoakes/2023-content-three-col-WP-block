@@ -1,6 +1,6 @@
 import { RichText } from '@wordpress/block-editor';
 
-export default function save({ attributes }) {
+export default function save ({ attributes }) {
 	const {
 		backgroundColour,
 		backgroundImage,
@@ -16,8 +16,6 @@ export default function save({ attributes }) {
 		textColour,
 		title
 	} = attributes;
-
-	console.log(attributes);
 
 	return (
 		<div

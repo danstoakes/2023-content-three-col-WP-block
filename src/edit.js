@@ -78,28 +78,39 @@ export default function Edit ({ attributes, setAttributes }) {
 					]}
 				/>
 				<PanelBody
-					title={ __( 'Background image', 'danstoakes-content-three-col' )}
+					title={__('Background image', 'danstoakes-content-three-col')}
 					initialOpen={true}
 				>
 					<PanelRow>
 						<fieldset help={__('A background image takes precedence over background colour.', 'danstoakes-content-three-col')}>
 							<MediaUploadCheck>
 								<MediaUpload
-									onSelect={(backgroundImage) => setAttributes({ backgroundImage: backgroundImage })}
+									onSelect={(backgroundImage) => setAttributes({ backgroundImage })}
 									allowedTypes={['image']}
 									value={backgroundImage}
 									render={({ open }) => (
 										<>
-											<span>A selected image takes precedence over background colour.</span>
+											<span>A selected image takes precedence over background color.</span>
 											{backgroundImage ? (
-												<img src={backgroundImage.url} alt="" style={{ maxWidth: '100%', marginBottom: '10px' }} />
-											) : null}
-											<Button onClick={open}>{__(backgroundImage ? 'Change Image' : 'Select Image', 'danstoakes-content-three-col')}</Button>
-											<p>
-											{attributes.backgroundImage === null
-												? ''
-												: '(' + attributes.backgroundImage.title + ')'}
-											</p>
+												<>
+													<img src={backgroundImage.url} alt="" style={{ maxWidth: '100%', marginBottom: '10px' }} />
+													<Button onClick={open}>{__('Change Image', 'danstoakes-content-three-col')}</Button>
+													<Button
+														isLink
+														onClick={() => setAttributes({ backgroundImage: null })}
+														isDestructive
+													>
+														{__('Delete Image', 'danstoakes-content-three-col')}
+													</Button>
+													<p>
+														{attributes.backgroundImage === null
+															? ''
+															: '(' + attributes.backgroundImage.title + ')'}
+													</p>
+												</>
+											) : (
+												<Button onClick={open}>{__('Select Image', 'danstoakes-content-three-col')}</Button>
+											)}
 										</>
 									)}
 								/>
