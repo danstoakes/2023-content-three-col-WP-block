@@ -52,10 +52,12 @@ export default function Edit ({ attributes, setAttributes }) {
 		<div
 			{...useBlockProps()}
 			style={{
+				backgroundColor: backgroundColour,
 				backgroundImage: backgroundImage,
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
-				backgroundRepeat: 'no-repeat'
+				backgroundRepeat: 'no-repeat',
+				color: textColour
 			}}
 		>
 			<InspectorControls>
@@ -80,7 +82,7 @@ export default function Edit ({ attributes, setAttributes }) {
 					initialOpen={true}
 				>
 					<PanelRow>
-						<fieldset>
+						<fieldset help={__('A background image takes precedence over background colour.', 'danstoakes-content-three-col')}>
 							<MediaUploadCheck>
 								<MediaUpload
 									onSelect={(backgroundImage) => setAttributes({ backgroundImage: backgroundImage })}
@@ -88,10 +90,16 @@ export default function Edit ({ attributes, setAttributes }) {
 									value={backgroundImage}
 									render={({ open }) => (
 										<>
+											<span>A selected image takes precedence over background colour.</span>
 											{backgroundImage ? (
 												<img src={backgroundImage.url} alt="" style={{ maxWidth: '100%', marginBottom: '10px' }} />
 											) : null}
-											<Button onClick={open}>{__('Select Image', 'danstoakes-content-three-col')}</Button>
+											<Button onClick={open}>{__(backgroundImage ? 'Change Image' : 'Select Image', 'danstoakes-content-three-col')}</Button>
+											<p>
+											{attributes.backgroundImage === null
+												? ''
+												: '(' + attributes.backgroundImage.title + ')'}
+											</p>
 										</>
 									)}
 								/>

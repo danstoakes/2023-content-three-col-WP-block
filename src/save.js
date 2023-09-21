@@ -27,6 +27,7 @@ export default function save({ attributes }) {
 				backgroundPosition: 'center',
 				backgroundSize: 'cover',
 				backgroundRepeat: 'no-repeat',
+				color: textColour
 			}}
 		>
 			<div className="content">

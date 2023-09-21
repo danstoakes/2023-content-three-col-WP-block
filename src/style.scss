@@ -1,12 +1,11 @@
-.wp-block-danstoakes-content-three-col-danstoakes-content-three-col {
-	background-color: #21759b;
-	color: #fff;
-	padding: 2px;
-}
-
 .content {
+	min-height: 100vh;
 	padding: 5rem;
 	text-align: center;
+
+	h1, h2, h3, h4, h5, h6 {
+		color: inherit;
+	}
 
 	&-column {
 		img {
